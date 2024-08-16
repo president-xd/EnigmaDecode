@@ -1,9 +1,9 @@
 # src/tests/test_decoders.py
 
 import pytest
-from src.EnigmaDecode import (binary_decode, hexadecimal_decode, octal_decode,
-                               ascii_decode, url_decode, unicode_point_decode,
-                               base32_decode, base64_decode)
+from EnigmaDecode import (binary_decode, hexadecimal_decode, octal_decode,
+                           ascii_decode, url_decode, unicode_point_decode,
+                           base32_decode, base64_decode)
 
 def test_binary_decode():
     assert binary_decode("01001000 01100101 01101100 01101100 01101111") == "Hello"
