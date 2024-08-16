@@ -43,17 +43,32 @@ def base32_decode(char: str) -> str:
     """Returns the decrypted text for Base32."""
     # Remove padding characters
     char = char.rstrip("=")
+    
     # Map Base32 characters to their binary equivalents
     base32_to_bin = {BASE32_ALPHABET[i]: format(i, '05b') for i in range(32)}
     
-    # Convert Base32 to binary string
+    # Convert Base32 string to binary string
     binary_string = ''.join(base32_to_bin[c] for c in char)
     
-    # Split binary string into 8-bit chunks and convert to ASCII
-    decoded_text = ''.join(chr(int(binary_string[i:i+8], 2)) for i in range(0, len(binary_string), 8))
+    # Handle padding by calculating the number of padding characters
+    padding_length = (8 - len(binary_string) % 8) % 8
+    if padding_length > 0:
+        binary_string = binary_string[:-padding_length*8]
     
-    # Remove any trailing null characters
-    return decoded_text.rstrip('\x00')
+    # Convert binary string to bytes and then to ASCII text
+    decoded_bytes = bytearray()
+    for i in range(0, len(binary_string), 8):
+        byte = binary_string[i:i+8]
+        if byte:
+            decoded_bytes.append(int(byte, 2))
+    
+    # Convert bytes to string
+    try:
+        decoded_text = decoded_bytes.decode('utf-8')
+    except UnicodeDecodeError:
+        raise ValueError("Error decoding Base32 string: contains invalid UTF-8 characters")
+    
+    return decoded_text
 
 def base64_decode(char: str) -> str:
     """Returns the decrypted text for Base64."""
