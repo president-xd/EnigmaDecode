@@ -52,7 +52,8 @@ def base32_decode(char: str) -> str:
     # Split binary string into 8-bit chunks and convert to ASCII
     decoded_text = ''.join(chr(int(binary_string[i:i+8], 2)) for i in range(0, len(binary_string), 8))
     
-    return decoded_text
+    # Remove any trailing null characters
+    return decoded_text.rstrip('\x00')
 
 def base64_decode(char: str) -> str:
     """Returns the decrypted text for Base64."""
