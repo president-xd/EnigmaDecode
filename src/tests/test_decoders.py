@@ -30,7 +30,7 @@ def test_unicode_point_decode():
     assert unicode_point_decode("0031 0032 0033") == "123"
 
 def test_base32_decode():
-    assert base32_decode("JBSWY3DPEBLW64TMMQ====") == "Hello"
+    assert base32_decode("JBCWY3DP") == "HEllo"
 
 def test_base64_decode():
     assert base64_decode("SGVsbG8=") == "Hello"
