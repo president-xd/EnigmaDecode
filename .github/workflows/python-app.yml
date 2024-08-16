@@ -27,13 +27,31 @@ jobs:
         pip install -r src/requirements.txt
 
     - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=src" >> $GITHUB_ENV
+
+    - name: Debug PYTHONPATH
+      run: echo "PYTHONPATH is $PYTHONPATH"
+
+    - name: List directory
       run: |
-        echo "PYTHONPATH=src" >> $GITHUB_ENV
+        echo "Listing the root directory:"
+        ls -al
+        echo "Listing the src directory:"
+        ls -al src
+        echo "Listing the tests directory:"
+        ls -al src/tests
+
+    - name: List installed packages
+      run: pip list
+
+    - name: Print Python version
+      run: python --version
 
     - name: Lint with flake8
       run: |
         flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
 
-    - name: Test with pytest
+    - name: Run Pytest
       run: |
-        pytest --maxfail=1 --disable-warnings -q
+        echo "Running Pytest:"
+        pytest --maxfail=1 --disable-warnings -v
