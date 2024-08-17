@@ -1,7 +1,35 @@
 import urllib.parse
+import colorama
+from colorama import Fore, Style
+import time
+import random
 
-# Define Base32 characters
-BASE32_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+
+colorama.init(autoreset=True)
+
+def rgb_color():
+    return f'\033[38;2;{random.randint(0,255)};{random.randint(0,255)};{random.randint(0,255)}m'
+
+def banner():
+    banner_text = '''
+
+ 88888888b                   oo                              888888ba                                   dP          
+ 88                                                          88    `8b                                  88          
+a88aaaa    88d888b. .d8888b. dP 88d888b. 88d8b.d8b. .d8888b. 88     88 .d8888b. .d8888b. .d8888b. .d888b88 .d8888b. 
+ 88        88'  `88 88'  `88 88 88'  `88 88'`88'`88 88'  `88 88     88 88ooood8 88'  `"" 88'  `88 88'  `88 88ooood8 
+ 88        88    88 88.  .88 88 88    88 88  88  88 88.  .88 88    .8P 88.  ... 88.  ... 88.  .88 88.  .88 88.  ... 
+ 88888888P dP    dP `8888P88 dP dP    dP dP  dP  dP `88888P8 8888888P  `88888P' `88888P' `88888P' `88888P8 `88888P' 
+                         .88                                                                                        
+                     d8888P                                                                                         
+By President
+
+    '''
+    
+    for char in banner_text:
+        print(f"{rgb_color()}{char}", end="", flush=True)
+        time.sleep(0.01)  # Adjust speed as needed
+
+
 
 def banner():
     print('''
@@ -55,6 +83,8 @@ def unicode_point_decode(char: str) -> str:
 
 def base32_decode(char: str) -> str:
     """Returns the decrypted text for Base32."""
+    # Define Base32 characters
+    BASE32_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
     # Remove padding characters
     char = char.rstrip("=")
     # Map Base32 characters to their binary equivalents
@@ -114,7 +144,7 @@ def display_menu():
     print("9. Exit")
 
 def main():
-    while True:
+        banner()
         display_menu()
         choice = input("Enter your choice (1-8): ")
         if choice == "1":
@@ -143,7 +173,6 @@ def main():
             print(f"Decoded text: {base64_decode(char)}")    
         elif choice == "9":
             print("Exiting...")
-            break
         else:
             print("Invalid choice. Please try again.")
 
