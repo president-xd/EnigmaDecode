@@ -78,7 +78,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Contact
 For any questions or feedback, feel free to reach out:
 
-Email: `your-email@example.com`
+Email: `lasharimohsin19@gmail.com`
 GitHub Issues: `Issues`
 Thank you for your interest in EnigmaDecode!
 ```javascript
